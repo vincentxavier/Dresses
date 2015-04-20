@@ -21,6 +21,6 @@ def get_meteo():
     direction_vent = meteo['list'][0]['deg']
     etat_ciel = meteo['list'][0]['weather'][0]['main']
     
-    return temp_jour,temp_soir,temp_max,temp_min,temp_matin,temp_nuit
+    return {'jour': temp_jour, 'soir': temp_soir, 'max': temp_max, 'min': temp_min, 'matin': temp_matin, 'nuit': temp_nuit}
 
 print(get_meteo())
