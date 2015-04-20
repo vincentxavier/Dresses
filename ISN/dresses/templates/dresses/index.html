@@ -5,6 +5,6 @@
 </ul>
 <ul>
     {% for v in vetements %}
-	<li>{{ v.nom }} : {{ v.temp_min }}</li>
+	<li>{{ v.nom }} : entre {{ v.temp_min }} et {{v.temp_max}}</li>
     {% endfor %}
 </ul>

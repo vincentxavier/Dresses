@@ -7,7 +7,7 @@ from .meteo import get_meteo
 def index(request):
     """Construction de l'index a partir des fonctions crees ailleurs"""
     temperature = get_meteo()
-    vetements = Vetement.objects.filter(temp_min__gte=10)
+    vetements = Vetement.objects.filter(temp_min__lte=temperature['min']).filter(temp_max__gte=temperature['max'])
     context = {
         'temperature': temperature,
         'vetements': vetements,
