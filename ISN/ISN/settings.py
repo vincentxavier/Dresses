@@ -89,7 +89,7 @@ LEAFLET_CONFIG = {
     # conf here
     'SPATIAL_EXTENT': (1.11510, 48.2119, 3.2959, 49.3394),
     'DEFAULT_CENTER': (48.86, 2.35),
-    'DEFAULT_ZOOM': 15,
+    'DEFAULT_ZOOM': 13,
     'MIN_ZOOM': 10,
     'MAX_ZOOM': 19,
 }

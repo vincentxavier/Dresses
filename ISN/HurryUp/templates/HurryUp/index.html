@@ -16,6 +16,9 @@
         {% for k,v in poi_departs.iteritems %}
         L.marker({{ v }}).addTo(map) ;
         {% endfor %}
+        {% for k,v in lines.iteritems %}
+        L.polyline({{ v }}).addTo(map) ;
+        {% endfor %}
     }
 </script>
 

@@ -17,7 +17,7 @@ def get_journeys():
     transports = query_navitia()
 
     addresse_depart = query_navitia('/places?q=4 passage Lacroix, Saint-Denis')
-    addresse_arrivee = query_navitia('/places?q=24 boulevard Pasteur, Paris')
+    addresse_arrivee = query_navitia('/places?q=16 rue du moulin de la Vierge, Paris')
 
     arret_depart = query_navitia('/coords/'+addresse_depart['places'][0]['id']+'/places_nearby')
     arret_arrivee = query_navitia('/coords/'+addresse_arrivee['places'][0]['id']+'/places_nearby')
@@ -45,6 +45,18 @@ def poi_departs_arrivees(best_route):
     return departs, arrivees
 
 
+def get_lines(best_route):
+    lines = {}
+    i = 0
+    for section in best_route['sections']:
+        i += 1
+        line = []
+        for coord in section['geojson']['coordinates']:
+            line.append([coord[1],coord[0]])
+        lines[i] = line
+    return lines
+
+
 def get_poi_departs(departs):
     poi_departs = {}
     poi_num = 0
@@ -53,7 +65,9 @@ def get_poi_departs(departs):
         poi_departs[poi_num] = [i[1],i[0]]
     return poi_departs
 
+
 journey = get_journeys()
 best_route = get_best_route(journey)
 departs, arrivees = poi_departs_arrivees(best_route)
-print(get_poi_departs(departs))
+
+print(get_lines(best_route))

@@ -9,7 +9,9 @@ def index(request):
     best_route = get_best_route(journey)
     departs, arrivees = poi_departs_arrivees(best_route)
     poi_departs = get_poi_departs(departs)
+    lines = get_lines(best_route)
     context = {
         'poi_departs': poi_departs,
+        'lines': lines
     }
     return render(request,"HurryUp/index.html",context)
