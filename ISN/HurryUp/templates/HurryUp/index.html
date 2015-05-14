@@ -13,7 +13,9 @@
 </style>
 <script type="text/javascript">
     function map_init_basic (map, options) {
-        L.marker([48.842584841, 2.3126051676]).addTo(map);
+        {% for k,v in poi_departs.iteritems %}
+        L.marker({{ v }}).addTo(map) ;
+        {% endfor %}
     }
 </script>
 
