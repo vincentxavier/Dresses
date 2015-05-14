@@ -1,0 +1,22 @@
+{% load leaflet_tags %}
+
+<head>
+    {% leaflet_js %}
+    {% leaflet_css %}
+</head>
+<style>
+
+    .leaflet-container {  /* all maps */
+        width:  800px;
+        height: 600px;
+    }
+</style>
+<script type="text/javascript">
+    function map_init_basic (map, options) {
+        L.marker([48.842584841, 2.3126051676]).addTo(map);
+    }
+</script>
+
+<body>
+    {% leaflet_map "yourmap" callback="window.map_init_basic"%}
+</body>
