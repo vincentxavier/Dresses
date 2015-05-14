@@ -16,8 +16,8 @@ def query_navitia(api_call=''):
 def get_journeys():
     transports = query_navitia()
 
-    addresse_depart = query_navitia('/places?q=4 passage Lacroix, Saint-Denis')
-    addresse_arrivee = query_navitia('/places?q=16 rue du moulin de la Vierge, Paris')
+    addresse_depart = query_navitia('/places?q=17 rue de l\'Égalité, Stains')
+    addresse_arrivee = query_navitia('/places?q=6 place de la Résistance, Saint-Denis')
 
     arret_depart = query_navitia('/coords/'+addresse_depart['places'][0]['id']+'/places_nearby')
     arret_arrivee = query_navitia('/coords/'+addresse_arrivee['places'][0]['id']+'/places_nearby')
@@ -40,8 +40,9 @@ def poi_departs_arrivees(best_route):
     departs = []
     arrivees = []
     for section in best_route['sections']:
-        departs.append(section['geojson']['coordinates'][0])
-        arrivees.append(section['geojson']['coordinates'][-1])
+        if section['type'] != 'waiting':
+            departs.append(section['geojson']['coordinates'][0])
+            arrivees.append(section['geojson']['coordinates'][-1])
     return departs, arrivees
 
 
@@ -51,9 +52,10 @@ def get_lines(best_route):
     for section in best_route['sections']:
         i += 1
         line = []
-        for coord in section['geojson']['coordinates']:
-            line.append([coord[1],coord[0]])
-        lines[i] = line
+        if section['type'] != 'waiting':
+            for coord in section['geojson']['coordinates']:
+                line.append([coord[1],coord[0]])
+            lines[i] = line
     return lines
 
 
